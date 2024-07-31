@@ -17,6 +17,10 @@
     </tr>
     </thead>
     <tbody>
+    <form th:action="@{/logout}" method="post">
+        <button type="submit">Logout</button>
+    </form>
+   <br><br>
     <tr th:each="student : ${students}">
         <td th:text="${student.id}"></td>
         <td th:text="${student.address}"></td>
