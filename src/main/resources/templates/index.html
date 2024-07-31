@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -23,14 +24,22 @@
         <td th:text="${student.name}"></td>
         <td th:text="${student.phone}"></td>
 
-        <td><a th:href="@{student-update/{id}(id=${student.id})}">Edit</a></td>
-        <td><a th:href="@{student-delete/{id}(id=${student.id})}">Delete</a></td>
+        <div sec:authorize="hasRole('ROLE_ADMIN')">
+            <td><a th:href="@{student-update/{id}(id=${student.id})}">Edit</a></td>
+        </div>
+        <div sec:authorize="hasRole('ROLE_ADMIN')">
+            <td><a th:href="@{student-delete/{id}(id=${student.id})}">Delete</a></td>
+        </div>
+
 
     </tr>
     </tbody>
 
 </table>
-<p><a href="/student-create">Create user</a> </p>
+<div sec:authorize="hasRole('ROLE_ADMIN')">
+    <p><a href="/student-create">Create user</a></p>
+</div>
+
 
 </body>
 </html>
