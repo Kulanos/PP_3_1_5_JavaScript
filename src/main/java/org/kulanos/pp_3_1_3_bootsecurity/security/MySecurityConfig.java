@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.User;
@@ -22,14 +23,9 @@ public class MySecurityConfig {
 
     @Bean
     public UserDetailsService userDetailsService() throws Exception {
-//        User.UserBuilder users = User.withDefaultPasswordEncoder();
-//
-//
-//       //User.UserBuilder users = User.builder().passwordEncoder(encoder::encode);
-//        InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
-//        manager.createUser(users.username("zaur").password("123").roles("USER").build());
-//        manager.createUser(users.username("alex").password("123").roles("USER", "ADMIN").build());
-//        return manager;
+
+        System.out.println(passwordEncoder().encode("123"));
+
         return new MyUserDetailsService();
     }
 
@@ -57,6 +53,10 @@ public class MySecurityConfig {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder(10);
     }
+
+
+
+
 
     @Bean
     public AuthenticationProvider authenticationProvider() throws Exception {
