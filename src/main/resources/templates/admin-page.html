@@ -6,41 +6,68 @@
     <title>Admin panel</title>
 </head>
 <body>
-Hello admin
-<table>
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>Age</th>
-        <th>Email</th>
-        <th>First Name</th>
-        <th>Last Name</th>
-    </tr>
-    </thead>
-    <tbody>
-<!--    <form th:action="@{/logout}" method="post">-->
-<!--        <button type="submit">Logout</button>-->
-<!--    </form>-->
-    <br><br>
-    <tr th:each="user : ${users}">
-        <td th:text="${user.id}"></td>
-        <td th:text="${user.age}"></td>
-        <td th:text="${user.email}"></td>
-        <td th:text="${user.firstName}"></td>
-        <td th:text="${user.lastName}"></td>
+<header>
+    <div>
+        <button>Logout</button>
+    </div>
+    <div>
+        <span>admin@mail.ru</span>
+    </div>
+</header>
 
-<!--        <div sec:authorize="hasRole('ROLE_ADMIN')">-->
-<!--            <td><a th:href="@{student-update/{id}(id=${student.id})}">Edit</a></td>-->
-<!--        </div>-->
-<!--        <div sec:authorize="hasRole('ROLE_ADMIN')">-->
-<!--            <td><a th:href="@{student-delete/{id}(id=${student.id})}">Delete</a></td>-->
-<!--        </div>-->
+<div>
+    <nav>
+        <ul>
+            <li><a href="#">Admin</a></li>
+            <li><a href="#">User</a></li>
+
+        </ul>
+    </nav>
+</div>
+
+<main>
+    <h1>Admin panel</h1>
+
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Age</th>
+            <th>Email</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Role</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <!--    <form th:action="@{/logout}" method="post">-->
+        <!--        <button type="submit">Logout</button>-->
+        <!--    </form>-->
+        <br><br>
+        <tr th:each="entity : ${usersWithRoles}">
+            <td th:text="${entity.key.id}"></td>
+            <td th:text="${entity.key.age}"></td>
+            <td th:text="${entity.key.email}"></td>
+            <td th:text="${entity.key.firstName}"></td>
+            <td th:text="${entity.key.lastName}"></td>
+            <td th:text="${entity.value}"></td>
+
+            <!--        <div sec:authorize="hasRole('ROLE_ADMIN')">-->
+            <!--            <td><a th:href="@{student-update/{id}(id=${student.id})}">Edit</a></td>-->
+            <!--        </div>-->
+            <!--        <div sec:authorize="hasRole('ROLE_ADMIN')">-->
+            <!--            <td><a th:href="@{student-delete/{id}(id=${student.id})}">Delete</a></td>-->
+            <!--        </div>-->
 
 
-    </tr>
-    </tbody>
+        </tr>
+        </tbody>
 
-</table>
+    </table>
+
+</main>
+
 <!--<div sec:authorize="hasRole('ROLE_ADMIN')">-->
 <!--    <p><a href="/student-create">Create user</a></p>-->
 <!--</div>-->

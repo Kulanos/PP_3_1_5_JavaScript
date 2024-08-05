@@ -33,4 +33,9 @@ public class UserService {
     public void deleteUser(Long id) {
         userRepository.deleteById(id);
     }
+
+    @Transactional(readOnly = true)
+    public User findByUserEmail(String email) {
+        return  userRepository.getUserByEmail(email);
+    }
 }
