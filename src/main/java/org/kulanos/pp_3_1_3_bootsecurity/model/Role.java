@@ -1,14 +1,17 @@
 package org.kulanos.pp_3_1_3_bootsecurity.model;
 
-
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
+import java.lang.annotation.Target;
+
+@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "roles")
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class Role {
 
     @Id
@@ -16,8 +19,6 @@ public class Role {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "name")
-    private String name;
-
-
+    @Column(name = "role_name")
+    private String roleName;
 }
