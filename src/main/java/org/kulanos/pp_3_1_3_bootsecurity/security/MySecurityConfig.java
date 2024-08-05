@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.kulanos.pp_3_1_3_bootsecurity.service.MyUserDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.Customizer;
@@ -21,25 +22,31 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-
+@Configuration
 @EnableWebSecurity
 public class MySecurityConfig {
 
-
+    @Autowired
+    private CustomAuthSuccessHandler customAuthSuccessHandler;
 
     @Bean
     public UserDetailsService userDetailsService() {
+        System.out.println(passwordEncoder().encode("123"));
         return new MyUserDetailService();
     }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(auth -> auth
-
+                        .requestMatchers("/login").permitAll() // Разрешить доступ к странице логина
+                        //.requestMatchers("/").hasAnyRole("ADMIN", "USER")
                         .requestMatchers("/users/**").hasAnyRole("ADMIN", "USER")
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .anyRequest().authenticated()
-                ).formLogin(Customizer.withDefaults())
+                )
+                .formLogin(form -> form
+                        .successHandler(customAuthSuccessHandler)
+                        .permitAll())
                 .logout(logout -> logout.permitAll())
                 .authenticationProvider(authenticationProvider());
 
