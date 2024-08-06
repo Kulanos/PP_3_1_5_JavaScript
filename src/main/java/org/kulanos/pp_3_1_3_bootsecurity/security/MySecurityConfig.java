@@ -28,24 +28,24 @@ public class MySecurityConfig {
         return new MyUserDetailService();
     }
 
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/login").permitAll() // Разрешить доступ к странице логина
-                        //.requestMatchers("/").hasAnyRole("ADMIN", "USER")
-                        .requestMatchers("/users/**").hasAnyRole("ADMIN", "USER")
-                        .requestMatchers("/admin/**").hasRole("ADMIN")
-                        .anyRequest().authenticated()
-                )
-                .formLogin(form -> form
-                        .successHandler(customAuthSuccessHandler)
-                        .permitAll())
-                .logout(logout -> logout.permitAll())
-                .authenticationProvider(authenticationProvider());
 
-        return http.build();
-    }
+@Bean
+public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    http.authorizeHttpRequests(auth -> auth
+                    .requestMatchers("/login").permitAll()
+                    .requestMatchers("/users/**").hasAnyRole("ADMIN", "USER")
+                    .requestMatchers("/admin/**").hasRole("ADMIN")
+                    .requestMatchers("/admin-add-user").hasRole("ADMIN")
+                    .anyRequest().authenticated()
+            )
+            .formLogin(form -> form
+                    .successHandler(customAuthSuccessHandler)
+                    .permitAll())
+            .logout(logout -> logout.permitAll())
+            .authenticationProvider(authenticationProvider());
 
+    return http.build();
+}
 
     @Bean
     public PasswordEncoder passwordEncoder() {

@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 
 @Data
 @Getter
@@ -20,4 +22,6 @@ public class Role {
 
     @Column(name = "role_name")
     private String roleName;
+
+
 }
