@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -20,10 +20,30 @@
         </div>
     </div>
 
+    <!--    <div class="row mb-2">-->
+    <!--        <div class="col-md-2 bg-primary text-white">-->
+    <!--            <a th:href="@{/admin}" style="color: lightgrey">Admin</a>-->
+    <!--        </div>-->
+    <!--        <div class="col-md-10">-->
+    <!--            <h2>User information-page</h2>-->
+    <!--            <ul class="nav nav-tabs">-->
+    <!--                <li class="nav-item">-->
+    <!--                    <a th:href="@{/user}" style="color: lightgrey">User</a>-->
+    <!--                </li>-->
+
+    <!--            </ul>-->
+    <!--        </div>-->
+    <!--    </div>-->
+
     <div class="row mb-2">
+
         <div class="col-md-2 bg-primary text-white">
-            <a th:href="@{/user}" style="color: lightgrey">User</a>
+            <div sec:authorize="hasRole('ROLE_ADMIN')">
+                <a th:href="@{/admin}" style="color: lightgrey">Admin</a>
+            </div>
         </div>
+
+
         <div class="col-md-10">
             <h2>User information-page</h2>
             <ul class="nav nav-tabs">
@@ -76,11 +96,11 @@
         </div>
     </div>
 </div>
-            <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-                    integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
-                    crossorigin="anonymous"></script>
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
-                    integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
-                    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+        integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
+        crossorigin="anonymous"></script>
 </body>
 </html>
