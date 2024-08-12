@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -27,25 +28,38 @@ public class MySecurityConfig {
         System.out.println(passwordEncoder().encode("123"));
         return new MyUserDetailService();
     }
+//    @Bean
+//    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+//        http
+//                .csrf(csrf -> csrf.disable())  // Отключение CSRF-защиты
+//                .authorizeHttpRequests(auth -> auth.anyRequest().permitAll()
+//                )
+//                .formLogin(form -> form
+//                        .disable())
+//                .httpBasic(b -> b.disable());
+//
+//        return http.build();
+//    }
 
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http.csrf(csrf -> csrf.disable())
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/login").permitAll()
+                        .requestMatchers("/users/**").hasAnyRole("ADMIN", "USER")
+                        .requestMatchers("/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/admin-add-user").hasRole("ADMIN")
+                        .anyRequest().authenticated()
+                )
+                .formLogin(form -> form
+                        .successHandler(customAuthSuccessHandler)
+                        .permitAll())
+                .logout(logout -> logout.permitAll())
+                .authenticationProvider(authenticationProvider())
+                .httpBasic(Customizer.withDefaults());
 
-@Bean
-public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-    http.authorizeHttpRequests(auth -> auth
-                    .requestMatchers("/login").permitAll()
-                    .requestMatchers("/users/**").hasAnyRole("ADMIN", "USER")
-                    .requestMatchers("/admin/**").hasRole("ADMIN")
-                    .requestMatchers("/admin-add-user").hasRole("ADMIN")
-                    .anyRequest().authenticated()
-            )
-            .formLogin(form -> form
-                    .successHandler(customAuthSuccessHandler)
-                    .permitAll())
-            .logout(logout -> logout.permitAll())
-            .authenticationProvider(authenticationProvider());
-
-    return http.build();
-}
+        return http.build();
+    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
