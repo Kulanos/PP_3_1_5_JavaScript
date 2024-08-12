@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", function () {
             document.querySelectorAll('.delete-btn').forEach(button => {
                 button.addEventListener('click', function () {
                     const  userId = this.getAttribute('data-id');
-                    fetch('/admin/delete-user/${userId}', {method: 'DELETE'})
+                    fetch(`/admin/delete-user/${userId}`, {method: 'DELETE'})
                         .then(response => {
                             if(response.ok) {
                                 this.closest('tr').remove();
@@ -37,6 +37,7 @@ document.addEventListener("DOMContentLoaded", function () {
             document.querySelectorAll('.update-btn').forEach(button => {
                 button.addEventListener('click', function () {
                     const userId = this.getAttribute('data-id');
+                    window.location.href = `/admin-add-user.html?id=${userId}`;
 
                 });
             });
