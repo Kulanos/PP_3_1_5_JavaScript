@@ -63,7 +63,6 @@ public class AdminController {
         return userService.findByUserEmail(email);
     }
 
-    // Новый метод для получения списка ролей
     @GetMapping("/api/roles")
     public List<Role> getAllRoles() {
         return roleService.findAll();

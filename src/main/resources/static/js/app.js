@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", function () {
     fetch('/admin')
         .then(respons => respons.json())
         .then(data => {
+
             const tableBody = document.querySelector('#user-table-body');
             data.forEach(user => {
                 const row = document.createElement('tr');
