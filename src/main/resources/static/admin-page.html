@@ -18,15 +18,25 @@
         </div>
     </div>
 
+
     <div class="row mb-2">
-        <div class="col-md-2 bg-primary text-white">
-            <a href="/admin-page.html" style="color: lightgrey">Admin</a>
+
+        <div class="col-md-2  text-white">
+            <div class="d-grid gap-2 col-12 mx-auto">
+                <a href="/admin-page.html" class="btn btn-primary" type="button">Admin</a>
+
+            </div>
+            <div class="d-grid gap-2 col-12 mx-auto">
+                <a href="/user-page.html" class="btn btn-light" type="button" style="color: dodgerblue">User</a>
+            </div>
+
         </div>
+
         <div class="col-md-10">
             <h2>Admin panel</h2>
             <ul class="nav nav-tabs">
                 <li class="nav-item">
-                    <a class="nav-link active" href="#">Users table</a>
+                    <a href="/admin-page.html" class="nav-link active">Users table</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/admin-add-user.html">New User</a>
@@ -35,12 +45,7 @@
         </div>
     </div>
 
-    <div class="row mb-2">
-        <div class="col-md-2 bg-white text-primary">
-            <a href="/user-page.html">User</a>
-        </div>
-        <div class="col-md-10"></div>
-    </div>
+
 
     <div class="row">
         <div class="col-md-2">
@@ -61,8 +66,6 @@
                 <tbody id="user-table-body">
 
 
-
-
                 </tbody>
             </table>
         </div>
@@ -72,7 +75,6 @@
 
 <script src="/js/app.js"></script>
 <script src="/js/add-user.js"></script>
-
 
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
