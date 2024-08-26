@@ -31,6 +31,13 @@ public class AdminController {
         userService.saveUser(user);
     }
 
+    /////
+
+    @GetMapping("/admin/{id}")
+    public User getUserById(@PathVariable("id") Long id) {
+        return userService.findUserById(id);
+    }
+
     @DeleteMapping("/admin/delete-user/{id}")
     public void deleteUser(@PathVariable("id") Long id) {
         User user = userService.findUserById(id);
