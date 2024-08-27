@@ -83,12 +83,11 @@ document.addEventListener("DOMContentLoaded", function () {
             document.getElementById('userFormNew').reset();
             document.getElementById('rolesNew').innerHTML = '';
 
-            // Загружаем роли заново
             fetch('/api/roles')
                 .then(response => response.json())
                 .then(roles => {
                     const rolesSelectNew = document.getElementById('rolesNew');
-                    rolesSelectNew.innerHTML = ''; // Очищаем список ролей перед загрузкой
+                    rolesSelectNew.innerHTML = '';
                     roles.forEach(role => {
                         const option = document.createElement('option');
                         option.value = role.id;
@@ -119,9 +118,9 @@ document.addEventListener("DOMContentLoaded", function () {
             })
                 .then(response => {
                     if (response.ok) {
-                        fetchUsers(); // Обновляем таблицу после добавления нового пользователя
+                        fetchUsers();
                         const modal = bootstrap.Modal.getInstance(document.getElementById('userModalNew'));
-                        modal.hide(); // Закрываем модальное окно после добавления
+                        modal.hide();
                     } else {
                         console.error('Failed to add user');
                     }
