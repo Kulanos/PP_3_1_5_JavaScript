@@ -13,7 +13,7 @@
 <div class="container-fluid">
     <div class="row mb-2">
         <div class="col-md-11" style="background-color: black; color: white;">
-            <h3><strong>user@mail.ru</strong> with roles: USER</h3>
+            <h3><strong>admin@mail.ru</strong> with roles: ADMIN USER</h3>
         </div>
         <div class="col-md-1" style="background-color: black">
             <a href="/logout" class="text-white-50 bg-dark">logout</a>
@@ -24,9 +24,13 @@
     <div class="row mb-2">
 
         <div class="col-md-2  text-white">
-            <div class="d-grid gap-2 col-12 mx-auto">
-                <a href="/user-page.html" class="btn btn-primary" type="button">User</a>
+            <div sec:authorize="hasRole('ROLE_ADMIN')" class="d-grid gap-2 col-12 mx-auto">
+                <a href="/admin-page.html" class="btn btn-primary" type="button">Admin</a>
             </div>
+            <div class="d-grid gap-2 col-12 mx-auto">
+                <a href="/admin-info.html" class="btn btn-light" type="button" style="color: dodgerblue">User</a>
+            </div>
+
         </div>
 
 
@@ -39,6 +43,7 @@
             </ul>
         </div>
     </div>
+
 
 
     <div class="row">
@@ -56,7 +61,8 @@
                     <th>Role</th>
                 </tr>
                 </thead>
-                <tbody id="user-table-body">
+                <tbody id = "user-table-body">
+
 
 
                 </tbody>
@@ -66,7 +72,7 @@
     </div>
 </div>
 
-<script src="/js/user-info.js"></script>
+<script src="/js/info.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
         integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
         crossorigin="anonymous"></script>

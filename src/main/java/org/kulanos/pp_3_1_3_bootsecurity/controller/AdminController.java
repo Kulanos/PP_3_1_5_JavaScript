@@ -64,7 +64,7 @@ public class AdminController {
         userService.saveUser(user);
     }
 
-    @GetMapping("/user")
+    @GetMapping("/admin-info")
     public User homeUserPage(Authentication auth) {
         String email = auth.getName();
         return userService.findByUserEmail(email);

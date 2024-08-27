@@ -46,9 +46,8 @@ public class MySecurityConfig {
         http.csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/login").permitAll()
-                        .requestMatchers("/users/**").hasAnyRole("ADMIN", "USER")
+                        .requestMatchers("/user/**").hasAnyRole("ADMIN", "USER")
                         .requestMatchers("/admin/**").hasRole("ADMIN")
-                        .requestMatchers("/admin-add-user").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
