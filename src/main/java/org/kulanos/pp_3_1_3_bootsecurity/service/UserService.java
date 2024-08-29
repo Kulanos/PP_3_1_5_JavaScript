@@ -5,6 +5,8 @@ import org.kulanos.pp_3_1_3_bootsecurity.model.User;
 import org.kulanos.pp_3_1_3_bootsecurity.repository.RoleRepository;
 import org.kulanos.pp_3_1_3_bootsecurity.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,6 +30,10 @@ public class UserService {
 
     @Transactional
     public void saveUser(User user) {
+
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+      String password = "123";
+      user.setPassword(passwordEncoder.encode(password));
         Set<Role> roles = user.getRoles().stream()
                 .map(role -> roleRepository.findById(role.getId()).orElseThrow(() -> new RuntimeException("Role not found")))
                 .collect(Collectors.toSet());

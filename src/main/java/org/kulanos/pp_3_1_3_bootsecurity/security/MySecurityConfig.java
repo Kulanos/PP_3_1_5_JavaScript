@@ -28,18 +28,7 @@ public class MySecurityConfig {
         System.out.println(passwordEncoder().encode("123"));
         return new MyUserDetailService();
     }
-//    @Bean
-//    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-//        http
-//                .csrf(csrf -> csrf.disable())  // Отключение CSRF-защиты
-//                .authorizeHttpRequests(auth -> auth.anyRequest().permitAll()
-//                )
-//                .formLogin(form -> form
-//                        .disable())
-//                .httpBasic(b -> b.disable());
-//
-//        return http.build();
-//    }
+
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {

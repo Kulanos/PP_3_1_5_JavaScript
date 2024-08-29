@@ -1,7 +1,6 @@
 package org.kulanos.pp_3_1_3_bootsecurity.controller;
 
 import org.kulanos.pp_3_1_3_bootsecurity.model.User;
-import org.kulanos.pp_3_1_3_bootsecurity.service.RoleService;
 import org.kulanos.pp_3_1_3_bootsecurity.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
